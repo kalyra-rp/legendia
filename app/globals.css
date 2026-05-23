@@ -1,26 +1,66 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ─────────────────────────────────────────────────────────────────────────
+   Palette « affiche de voyage » — clair, chaleureux, vintage.
+   Chaque entrée devient un utilitaire Tailwind : bg-paper, text-ink, etc.
+   ───────────────────────────────────────────────────────────────────────── */
+@theme {
+  --color-paper:          #f5ebe3;
+  --color-ink:            #43342d;
+  --color-verdigris:      #5b9085;
+  --color-verdigris-deep: #3f6f64;
+  --color-copper:         #bd7a54;
+  --color-rose:           #cf9ea2;
+  --color-muted:          #8a7468;
+  --color-line:           #e3d2c6;
 }
 
+/* Polices : variables injectées par next/font/google dans layout.tsx.
+   `@theme inline` propage la référence à la variable telle quelle. */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-fraunces);
+  --font-serif:   var(--font-newsreader);
+  --font-mono:    var(--font-space-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Legendia est TOUJOURS clair, jamais de dark mode. On le déclare
+   explicitement au navigateur pour qu'il n'applique pas son auto-dark
+   (Chrome/Edge sur OS en mode sombre inversent sinon les couleurs). */
+:root {
+  color-scheme: light;
 }
 
+/* Fond de page : papier crème + brume rosée diffuse en haut.
+   On sépare background-color (couleur de base, non surchargeable par le
+   mode sombre du navigateur) et background-image (la brume rosée). */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-paper);
+  background-image: radial-gradient(
+    ellipse 90% 50% at 50% -8%,
+    color-mix(in oklab, var(--color-rose) 38%, transparent),
+    transparent 70%
+  );
+  background-repeat: no-repeat;
+  color: var(--color-ink);
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+}
+
+/* Apparition douce, utilisée en stagger sur les cartes de lieux. */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade-up {
+  opacity: 0;
+  animation: fade-up 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+/* Respect des préférences accessibilité : pas d'anim si l'utilisateur
+   a activé prefers-reduced-motion. */
+@media (prefers-reduced-motion: reduce) {
+  .fade-up {
+    animation: none;
+    opacity: 1;
+  }
 }
