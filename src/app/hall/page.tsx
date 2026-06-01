@@ -28,17 +28,39 @@ export default async function HallPage() {
     redirect("/");
   }
 
-  // Discord remplit ces champs dans user_metadata. On prend le premier dispo
-  // pour afficher un pseudo lisible.
+  // On lit SON profil dans la table `profils`. Grâce à la RLS, cette requête
+  // ne peut renvoyer que la ligne de l'utilisateur connecté — impossible de
+  // lire celle de quelqu'un d'autre, même en trafiquant la requête.
+  const { data: profil } = await supabase
+    .from("profils")
+    .select("pseudo, avatar_url, role")
+    .eq("id", user.id)
+    .single();
+
+  // On affiche en priorité les infos de la table ; à défaut, on retombe sur
+  // les métadonnées Discord (utile juste après l'inscription).
   const meta = user.user_metadata ?? {};
   const pseudo =
+    profil?.pseudo ??
     meta.full_name ??
     meta.name ??
     meta.user_name ??
-    meta.preferred_username ??
     user.email ??
     "voyageur·euse";
-  const avatar = meta.avatar_url as string | undefined;
+  const avatar = (profil?.avatar_url ?? meta.avatar_url) as string | undefined;
+  const role = profil?.role ?? "membre";
+
+  // Habillage du badge de rôle selon le niveau.
+  const roleStyle: Record<string, string> = {
+    admin: "border-coral text-coral-d",
+    moderateur: "border-sun-d text-sun-d",
+    membre: "border-leaf-d text-leaf-d",
+  };
+  const roleLabel: Record<string, string> = {
+    admin: "Admin",
+    moderateur: "Modération",
+    membre: "Membre",
+  };
 
   return (
     <main className="flex flex-1 items-center justify-center px-6 py-16">
@@ -65,9 +87,19 @@ export default async function HallPage() {
           <span className="text-indigo">{pseudo}</span>
         </h1>
 
+        {/* Badge de rôle, lu depuis la table profils. */}
+        <span
+          className={`mt-4 inline-block rounded-full border-2 bg-card px-4 py-1.5 font-mono text-[11px] font-medium uppercase tracking-[0.2em] ${
+            roleStyle[role] ?? roleStyle.membre
+          }`}
+        >
+          {roleLabel[role] ?? role}
+        </span>
+
         <p className="mx-auto mt-4 max-w-sm text-ink-soft">
           Le verrou fonctionne : cette page n’est visible qu’une fois connecté·e
-          via Discord. Bienvenue à Legendia. 🌺
+          via Discord, et ton rôle est lu depuis la base. Bienvenue à
+          Legendia. 🌺
         </p>
 
         <form action={seDeconnecter} className="mt-8">
