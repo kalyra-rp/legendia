@@ -29,7 +29,28 @@ function LogoMaison() {
   );
 }
 
-export default function LeSeuil() {
+export default async function LeSeuil({
+  searchParams,
+}: {
+  // Next.js passe les paramètres d'URL ici (sous forme de promesse).
+  searchParams: Promise<{ acces?: string; erreur_connexion?: string }>;
+}) {
+  const params = await searchParams;
+
+  // Message doux à afficher selon ce que le callback nous a renvoyé.
+  let avis: { titre: string; texte: string } | null = null;
+  if (params.acces === "refuse") {
+    avis = {
+      titre: "L’accès est réservé aux membres du serveur Discord de Legendia.",
+      texte: "Rejoins-nous d’abord sur Discord, puis reviens pousser la porte. 🌺",
+    };
+  } else if (params.erreur_connexion === "1") {
+    avis = {
+      titre: "La connexion n’a pas pu aboutir.",
+      texte: "Ce n’est rien — réessaie dans un instant.",
+    };
+  }
+
   return (
     <main className="flex flex-1 items-center justify-center px-6 py-16">
       <div className="w-full max-w-2xl text-center">
@@ -58,23 +79,30 @@ export default function LeSeuil() {
 
         {/* Titre */}
         <h1 className="mt-6 font-display text-4xl font-semibold leading-[1.05] tracking-tight text-ink sm:text-5xl">
-          Une vie douce vous attend à{" "}
-          <span className="text-coral">Saint-Pierre</span>.
+          Vivez des histoires, tout en douceur.
         </h1>
 
         {/* Sous-titre */}
         <p className="mx-auto mt-5 max-w-xl text-base text-ink-soft sm:text-lg">
-          Legendia est un studio de jeu de rôle textuel où l’on incarne des
-          habitants ordinaires et où l’on vit, au rythme de l’île. Le premier
-          univers —{" "}
-          <strong className="font-semibold text-ink">Saint-Pierre</strong>, à La
-          Réunion — ouvre bientôt ses portes.
+          Legendia est un studio de jeu de rôle textuel dédié au{" "}
+          <em>slice of life</em> : on y incarne des gens ordinaires et on vit
+          leur quotidien, sans pression, au fil des mois. De nouveaux univers
+          ouvriront au fil du temps — le tout premier, ensoleillé, est presque
+          prêt.
         </p>
 
         {/* Connexion Discord — désormais fonctionnelle (Phase I) */}
         <div className="mt-10">
           <DiscordLoginButton />
         </div>
+
+        {/* Message doux (accès refusé, ou échec de connexion) */}
+        {avis && (
+          <div className="mx-auto mt-6 max-w-md rounded-2xl border-2 border-line-2 bg-card/70 px-5 py-4">
+            <p className="font-semibold text-ink">{avis.titre}</p>
+            <p className="mt-1 text-sm text-ink-soft">{avis.texte}</p>
+          </div>
+        )}
       </div>
     </main>
   );
