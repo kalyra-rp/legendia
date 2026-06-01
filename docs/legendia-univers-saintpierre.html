@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legendia · Saint-Pierre 974 — Bible de l'univers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fff8ed; --bg-2:#fdeed8; --card:#ffffff; --ink:#23303a; --ink-soft:#5c6b73; --faint:#9fb0b3;
+    --turq:#1fb6ad; --turq-d:#13948c; --coral:#ff6f54; --coral-d:#e8503a;
+    --sun:#ffb627; --sun-d:#ef9d0a; --leaf:#6cbf5b; --leaf-d:#4d9c3f;
+    --plum:#9a5ba6; --sky:#37a6db; --sand:#e6c79c;
+    --line:#f0e3cd; --line-2:#e3d2b3; --shadow:rgba(70,55,30,.13);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:"Plus Jakarta Sans",sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(circle at 10% 6%,rgba(31,182,173,.16),transparent 32%),radial-gradient(circle at 92% 10%,rgba(255,182,39,.18),transparent 34%),radial-gradient(circle at 50% 102%,rgba(255,111,84,.10),transparent 42%)}
+  .wrap{max-width:900px;margin:0 auto;padding:54px 28px 120px}
+
+  /* cover */
+  .cover{text-align:center;padding:30px 16px 50px;border-bottom:2px dotted var(--line-2)}
+  .ribbon{display:inline-flex;align-items:center;gap:8px;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--turq-d);background:#fff;border:2px solid var(--turq);border-radius:99px;padding:5px 14px;margin-bottom:20px;font-weight:500}
+  .sun-emoji{font-size:54px;display:block;margin-bottom:8px;filter:drop-shadow(0 6px 14px rgba(255,150,30,.4))}
+  h1.title{font-family:"Fraunces",serif;font-size:62px;font-weight:600;line-height:1;letter-spacing:-1.5px;margin-bottom:6px}
+  h1.title .a{color:var(--coral)}
+  .sub-island{font-family:"Fraunces",serif;font-style:italic;font-size:21px;color:var(--turq-d);margin-bottom:18px}
+  .tagline{font-size:17px;color:var(--ink-soft);max-width:540px;margin:0 auto 26px;font-weight:500}
+  .meta{display:inline-flex;gap:16px;flex-wrap:wrap;justify-content:center;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--faint)}
+  .meta span{background:#fff;border:1.5px solid var(--line-2);border-radius:99px;padding:5px 13px}
+
+  h2{font-family:"Fraunces",serif;font-size:13px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin:60px 0 8px;display:inline-flex;align-items:center;gap:9px;padding:6px 15px;border-radius:99px;color:#fff}
+  h2.c1{background:var(--turq-d)} h2.c2{background:var(--coral)} h2.c3{background:var(--sun-d)} h2.c4{background:var(--leaf-d)} h2.c5{background:var(--plum)}
+  .lede{font-size:16.5px;color:var(--ink-soft);margin:6px 0 24px;max-width:660px;font-weight:500;font-style:italic}
+
+  /* intro card */
+  .intro{border-radius:20px;padding:26px 28px;background:linear-gradient(150deg,#fff,#f3fdfb);border:2px solid var(--turq);box-shadow:0 16px 40px -20px var(--turq)}
+  .intro p{font-size:15px;color:var(--ink-soft);margin-bottom:13px;font-weight:500}
+  .intro p:last-child{margin-bottom:0}
+  .intro b{color:var(--ink);font-weight:700}
+  .intro .real{display:inline-block;background:#e8faf8;color:var(--turq-d);font-family:"IBM Plex Mono",monospace;font-size:11px;padding:2px 9px;border-radius:6px;font-weight:500}
+
+  /* fact chips */
+  .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:8px}
+  .fact{padding:16px 18px;border-radius:14px;background:var(--card);border:2px solid var(--line);box-shadow:0 5px 16px -12px var(--shadow)}
+  .fact .fe{font-size:22px;margin-bottom:7px}
+  .fact .fk{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--faint);margin-bottom:2px}
+  .fact .fv{font-family:"Fraunces",serif;font-size:17px;font-weight:700;line-height:1.2}
+  .fact .fv small{display:block;font-family:"Plus Jakarta Sans";font-size:12px;font-weight:500;color:var(--ink-soft);margin-top:3px}
+
+  /* TOC */
+  .toc{display:flex;flex-direction:column;gap:12px;margin-top:8px}
+  .entry{display:flex;align-items:center;gap:16px;padding:17px 20px;border-radius:14px;background:var(--card);border:2px solid var(--line);transition:.16s;position:relative;overflow:hidden}
+  .entry::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--ec,var(--turq))}
+  .entry:hover{transform:translateX(4px);border-color:var(--ec)}
+  .entry .num{font-family:"Fraunces",serif;font-style:italic;color:var(--ec,var(--turq));font-size:19px;width:34px;flex-shrink:0;font-weight:600}
+  .entry .b{flex:1;min-width:0}
+  .entry .name{font-family:"Fraunces",serif;font-size:19px;font-weight:700;line-height:1.2;margin-bottom:2px}
+  .entry .desc{font-size:13px;color:var(--ink-soft);font-weight:500}
+  .entry .st{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:1px;text-transform:uppercase;font-weight:500;padding:5px 10px;border-radius:99px;flex-shrink:0;background:var(--bg-2);color:var(--faint);border:1.5px solid var(--line-2)}
+  .entry .st.next{background:#fff2cf;color:var(--sun-d);border-color:var(--sun)}
+  .entry .st.done{background:#e3f7dd;color:var(--leaf-d);border-color:var(--leaf)}
+
+  .foot{margin-top:70px;padding-top:28px;border-top:2px dotted var(--line-2);text-align:center;font-size:14px;color:var(--faint);font-weight:600;font-family:"Fraunces",serif;font-style:italic}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="cover">
+    <span class="sun-emoji">🌺</span>
+    <div class="ribbon">Univers nᵒ 1 · Bible vivante</div>
+    <h1 class="title">Saint-Pierre <span class="a">974</span></h1>
+    <div class="sub-island">La capitale du Sud · île de La Réunion</div>
+    <p class="tagline">Une vraie ville, une vraie île, le quotidien sous les tropiques. Ici, on vit, on s'aime, on se chamaille — au rythme du lagon et des alizés.</p>
+    <div class="meta"><span>Slice of life</span><span>Contemporain</span><span>Réaliste fidèle</span><span>v. 0.1</span></div>
+  </div>
+
+  <h2 class="c1">🌴 L'esprit de l'univers</h2>
+  <p class="lede">Pas de mythologie, pas de secret enfoui. Juste la vraie vie, sous un soleil qui change tout.</p>
+
+  <div class="intro">
+    <p>Bienvenue à <b>Saint-Pierre</b>, « capitale » du Sud réunionnais — une vraie ville de 84 000 habitants, balnéaire, festive, métissée. <span class="real">ville réelle, restituée fidèlement</span></p>
+    <p>Ici, le décor existe pour de vrai : le <b>front de mer</b> et son lagon, le <b>marché forain du samedi</b> (l'un des plus beaux de France), le vieux quartier de pêcheurs de <b>Terre-Sainte</b> et ses ruelles, le port de plaisance, les temples tamouls, la rue commerçante des Bons Enfants. Les joueurs reconnaissent les lieux, s'y projettent tout de suite — zéro worldbuilding à apprendre.</p>
+    <p>Ce qu'on invente, ce sont les <b>habitants et leurs histoires</b>. Le quotidien ordinaire : un boulot, des amours, des amitiés, des voisins. Le slice of life pur, porté par une île qui a du caractère — chaleur, créole, cyclones, fêtes, et le Sud sauvage à portée de route.</p>
+  </div>
+
+  <h2 class="c3">📍 La fiche d'identité</h2>
+  <p class="lede">Les repères réels de la ville, pour ancrer le jeu dans le vrai.</p>
+  <div class="facts">
+    <div class="fact"><div class="fe">🏝️</div><div class="fk">Lieu</div><div class="fv">Saint-Pierre<small>Sud de La Réunion (974)</small></div></div>
+    <div class="fact"><div class="fe">👥</div><div class="fk">Population</div><div class="fv">~84 000<small>3ᵉ ville de l'île</small></div></div>
+    <div class="fact"><div class="fe">🌡️</div><div class="fk">Climat</div><div class="fv">Tropical<small>tempéré dans les Hauts</small></div></div>
+    <div class="fact"><div class="fe">🗓️</div><div class="fk">Saisons</div><div class="fv">Inversées<small>été austral : déc.–mars</small></div></div>
+    <div class="fact"><div class="fe">🌀</div><div class="fk">Aléa</div><div class="fv">Cyclones<small>l'été, la vie se suspend</small></div></div>
+    <div class="fact"><div class="fe">🎶</div><div class="fk">Vibe</div><div class="fv">Festive<small>Sakifo, marché, front de mer</small></div></div>
+  </div>
+
+  <h2 class="c2">🧭 Le sommaire</h2>
+  <p class="lede">On construit la bible en cercles : d'abord la ville, puis ses lieux, puis la vie qu'on y mène. On enrichit ensemble, chapitre par chapitre.</p>
+
+  <div class="toc">
+    <div class="entry" style="--ec:var(--turq)">
+      <div class="num">I.</div>
+      <div class="b"><div class="name">La ville & ses quartiers</div><div class="desc">Le centre, Terre-Sainte, la Ravine Blanche, Basse Terre… la géographie réelle et l'ambiance de chacun.</div></div>
+      <div class="st next">À écrire</div>
+    </div>
+    <div class="entry" style="--ec:var(--coral)">
+      <div class="num">II.</div>
+      <div class="b"><div class="name">Les lieux de vie</div><div class="desc">Le front de mer, le marché forain, le port, les cafés, la plage, les temples. Les décors où l'on se croise.</div></div>
+      <div class="st">À venir</div>
+    </div>
+    <div class="entry" style="--ec:var(--sun-d)">
+      <div class="num">III.</div>
+      <div class="b"><div class="name">Le Sud accessible</div><div class="desc">Au-delà de la ville : Grand-Bois, le sud sauvage, le volcan, Cilaos, les Hauts. Les escapades jouables.</div></div>
+      <div class="st">À venir</div>
+    </div>
+    <div class="entry" style="--ec:var(--leaf-d)">
+      <div class="num">IV.</div>
+      <div class="b"><div class="name">La vie quotidienne & la culture</div><div class="desc">Le créole, la cuisine, les métiers d'ici, le rythme de l'île, le vivre-ensemble métissé.</div></div>
+      <div class="st">À venir</div>
+    </div>
+    <div class="entry" style="--ec:var(--plum)">
+      <div class="num">V.</div>
+      <div class="b"><div class="name">Le calendrier de l'île</div><div class="desc">Les saisons inversées, les fêtes (20 Désanm, Dipavali, Sakifo…), la saison cyclonique. Ce que le MJ fera vivre chaque mois.</div></div>
+      <div class="st">À venir</div>
+    </div>
+    <div class="entry" style="--ec:var(--sky)">
+      <div class="num">VI.</div>
+      <div class="b"><div class="name">Jouer ici : cadre & ton</div><div class="desc">Quels personnages, quels métiers, quelles histoires. Les règles douces du slice of life saint-pierrois.</div></div>
+      <div class="st">À venir</div>
+    </div>
+  </div>
+
+  <div class="foot">« Lo soley i lève pou tout le monde. » · Bible évolutive — on déplie chaque chapitre ensemble.</div>
+
+</div>
+</body>
+</html>

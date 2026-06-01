@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legendia · Roadmap de développement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fdf6ec; --bg-2:#fbeede; --card:#ffffff; --ink:#241c2b; --ink-soft:#6a5f72; --faint:#a99fb0;
+    --coral:#ff6b5e; --coral-d:#e8503f; --indigo:#5b53d6; --indigo-d:#4039b5;
+    --sun:#ffc23d; --sun-d:#f0a818; --leaf:#2fb87f; --leaf-d:#1f9c68; --pink:#ff7eb6; --sky:#3fb0e8;
+    --line:#efe3d2; --line-2:#e3d3bd; --shadow:rgba(90,60,40,.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:"Plus Jakarta Sans",sans-serif;background:var(--bg);color:var(--ink);line-height:1.62;-webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(circle at 8% 4%,rgba(91,83,214,.12),transparent 28%),radial-gradient(circle at 95% 7%,rgba(255,194,61,.13),transparent 30%)}
+  .shell{display:flex;max-width:1140px;margin:0 auto;align-items:flex-start}
+  .sidebar{position:sticky;top:0;height:100vh;width:248px;flex-shrink:0;padding:26px 18px;overflow-y:auto;border-right:2px dotted var(--line-2)}
+  .content{flex:1;min-width:0;padding:40px 38px 110px;max-width:800px}
+  @media(max-width:880px){.sidebar{display:none}.content{padding:30px 20px 90px}}
+
+  .side-logo{display:flex;align-items:center;gap:11px;margin-bottom:18px}
+  .side-logo .mk{width:38px;height:38px;border-radius:12px;background:linear-gradient(140deg,var(--coral),var(--sun));display:grid;place-items:center;color:#fff;transform:rotate(-5deg);box-shadow:0 6px 14px -5px var(--coral)}
+  .side-logo .mk svg{width:20px;height:20px}
+  .side-logo .lt{font-family:"Fraunces",serif;font-size:19px;font-weight:700}
+  .side-logo .ls{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--indigo);margin-top:2px}
+  .nav-group{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--faint);margin:16px 0 7px 10px}
+  .nav a{display:flex;align-items:center;gap:9px;padding:8px 11px;border-radius:9px;text-decoration:none;color:var(--ink-soft);font-size:13px;font-weight:600;margin-bottom:2px;transition:.14s}
+  .nav a:hover{background:var(--bg-2);color:var(--ink)}
+  .nav a.active{background:#fff;color:var(--indigo-d);border:1.5px solid var(--line-2);box-shadow:0 3px 10px -6px var(--shadow)}
+  .nav a .nn{font-family:"Fraunces",serif;font-style:italic;font-size:12px;color:var(--faint);margin-left:auto}
+
+  .mobtop{display:none}
+  @media(max-width:880px){.mobtop{display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:30;background:rgba(253,246,236,.95);backdrop-filter:blur(8px);padding:13px 20px;border-bottom:2px dotted var(--line-2)}.mobtop .mk{width:30px;height:30px;border-radius:9px;background:linear-gradient(140deg,var(--coral),var(--sun));display:grid;place-items:center;color:#fff}.mobtop .mk svg{width:16px;height:16px}.mobtop b{font-family:"Fraunces",serif;font-size:16px}}
+
+  .hero{padding:6px 0 32px;border-bottom:2px dotted var(--line-2);margin-bottom:10px}
+  .eyebrow{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--indigo);background:#fff;border:2px solid var(--indigo);border-radius:99px;padding:5px 13px;margin-bottom:15px;font-weight:500}
+  h1{font-family:"Fraunces",serif;font-size:44px;font-weight:600;line-height:1.03;letter-spacing:-1.2px;margin-bottom:12px}
+  h1 .pop{color:var(--coral)}
+  .hero p{font-size:16px;color:var(--ink-soft);font-weight:500;max-width:580px}
+
+  section{scroll-margin-top:20px;padding-top:34px}
+  .sec-tag{display:inline-flex;align-items:center;gap:8px;font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;border-radius:99px;color:#fff;margin-bottom:13px}
+  .t-coral{background:var(--coral)} .t-indigo{background:var(--indigo)} .t-leaf{background:var(--leaf-d)} .t-sun{background:var(--sun-d)} .t-pink{background:var(--pink)} .t-sky{background:var(--sky)}
+  .sec-h{font-family:"Fraunces",serif;font-size:30px;font-weight:600;letter-spacing:-.5px;line-height:1.1;margin-bottom:7px}
+  .sec-lede{font-size:15.5px;color:var(--ink-soft);font-style:italic;margin-bottom:20px;max-width:620px}
+
+  /* phase header card */
+  .phase-card{border-radius:16px;padding:18px 22px;margin-bottom:16px;border:2px solid var(--pc);background:linear-gradient(140deg,color-mix(in srgb,var(--pc) 10%,#fff),#fff)}
+  .phase-card .pgoal{font-size:14px;color:var(--ink-soft);font-weight:500}
+  .phase-card .pgoal b{color:var(--ink);font-weight:700}
+  .phase-card .pship{display:inline-flex;align-items:center;gap:7px;margin-top:10px;font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:500;color:var(--pc);background:#fff;border:1.5px solid var(--pc);border-radius:99px;padding:4px 11px}
+
+  /* task list */
+  .tasks{display:flex;flex-direction:column;gap:8px}
+  .task{display:flex;gap:13px;padding:13px 16px;border-radius:12px;background:var(--card);border:2px solid var(--line);align-items:flex-start;box-shadow:0 4px 13px -11px var(--shadow)}
+  .task .chk{width:21px;height:21px;border-radius:6px;border:2px solid var(--line-2);flex-shrink:0;margin-top:1px;display:grid;place-items:center;font-size:12px;color:var(--leaf-d);cursor:pointer;transition:.12s;font-weight:700}
+  .task .chk:hover{border-color:var(--leaf)}
+  .task.done .chk{background:var(--leaf);border-color:var(--leaf);color:#fff}
+  .task.done .tt{text-decoration:line-through;color:var(--faint)}
+  .task .tx{flex:1}
+  .task .tt{font-size:14px;font-weight:600;line-height:1.4}
+  .task .td{font-size:12.5px;color:var(--ink-soft);font-weight:500;margin-top:2px}
+  .task .td code{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--indigo-d);background:#f0eeff;padding:1px 5px;border-radius:4px}
+
+  .callout{border-radius:14px;padding:17px 20px;margin:14px 0;border:2px solid var(--line-2);background:linear-gradient(150deg,rgba(255,194,61,.10),transparent)}
+  .callout.tip{background:linear-gradient(150deg,rgba(47,184,127,.10),transparent);border-color:var(--leaf)}
+  .callout.warn{background:linear-gradient(150deg,rgba(255,107,94,.10),transparent);border-color:var(--coral)}
+  .callout h4{font-family:"Fraunces",serif;font-size:15px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+  .callout.tip h4{color:var(--leaf-d)} .callout.warn h4{color:var(--coral-d)}
+  .callout p{font-size:13px;color:var(--ink-soft);font-weight:500;margin-bottom:6px}
+  .callout p:last-child{margin-bottom:0}
+  .callout code{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink);background:var(--bg-2);padding:1px 6px;border-radius:5px}
+  .callout b{color:var(--ink);font-weight:700}
+
+  .stackrow{display:flex;flex-wrap:wrap;gap:9px;margin:4px 0 4px}
+  .stk{background:#fff;border:2px solid var(--line-2);border-radius:11px;padding:9px 14px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px}
+  .stk .se{font-size:16px}
+  .stk small{color:var(--faint);font-weight:500;font-family:"IBM Plex Mono",monospace;font-size:10px}
+
+  .foot{margin-top:56px;padding-top:24px;border-top:2px dotted var(--line-2);text-align:center;font-size:13px;color:var(--faint);font-weight:600;font-family:"Fraunces",serif;font-style:italic}
+  .prog{position:sticky;bottom:14px;margin-top:28px;background:#fff;border:2px solid var(--indigo);border-radius:14px;padding:13px 18px;display:flex;align-items:center;gap:14px;box-shadow:0 12px 30px -14px var(--indigo)}
+  .prog .pbar{flex:1;height:10px;border-radius:99px;background:var(--bg-2);overflow:hidden}
+  .prog .pbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--leaf),var(--sun));border-radius:99px;transition:width .3s}
+  .prog .ptxt{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;color:var(--indigo-d);white-space:nowrap}
+</style>
+</head>
+<body>
+
+<div class="mobtop"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V8l7-4 7 4v13"/></svg></span><b>Roadmap Legendia</b></div>
+
+<div class="shell">
+  <aside class="sidebar">
+    <div class="side-logo"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V8l7-4 7 4v13"/><path d="M9 21v-5h6v5"/></svg></span><div><div class="lt">Legendia</div><div class="ls">Roadmap dev</div></div></div>
+    <nav class="nav">
+      <div class="nav-group">Avant de coder</div>
+      <a href="#stack"><span>🧰</span> La stack <span class="nn">0</span></a>
+      <a href="#setup"><span>🚀</span> Le socle déployé <span class="nn">0</span></a>
+      <div class="nav-group">Les phases</div>
+      <a href="#p1"><span>🪪</span> Compte & accès <span class="nn">I</span></a>
+      <a href="#p2"><span>🏠</span> Hall & univers <span class="nn">II</span></a>
+      <a href="#p3"><span>🎭</span> Persos & fiches <span class="nn">III</span></a>
+      <a href="#p4"><span>🗺️</span> Ville & scènes <span class="nn">IV</span></a>
+      <a href="#p5"><span>✦</span> Le MJ <span class="nn">V</span></a>
+      <a href="#p6"><span>🔔</span> Beffroi & vie <span class="nn">VI</span></a>
+      <a href="#p7"><span>🌺</span> Polish & ouverture <span class="nn">VII</span></a>
+      <div class="nav-group">Méthode</div>
+      <a href="#method"><span>🧭</span> Conseils de route</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <div class="hero">
+      <div class="eyebrow">Roadmap de développement · v.1</div>
+      <h1>Construire <span class="pop">Legendia</span>, couche par couche</h1>
+      <p>Une feuille de route pensée pour le « deploy early » : en ligne dès le jour 1, partageable à tout moment. Chaque phase marche seule avant la suivante. Coche au fur et à mesure.</p>
+    </div>
+
+    <!-- STACK -->
+    <section id="stack">
+      <div class="sec-tag t-coral">Étape 0 · a</div>
+      <h2 class="sec-h">La stack</h2>
+      <p class="sec-lede">Tout ce qu'il te faut, et rien de plus. Du moderne, du bien documenté, du gratuit pour démarrer.</p>
+      <div class="stackrow">
+        <span class="stk"><span class="se">▲</span>Next.js <small>framework</small></span>
+        <span class="stk"><span class="se">◆</span>Vercel <small>hébergement</small></span>
+        <span class="stk"><span class="se">▣</span>Supabase <small>base + auth</small></span>
+        <span class="stk"><span class="se">🔗</span>GitHub <small>code + versions</small></span>
+        <span class="stk"><span class="se">🎨</span>Tailwind <small>styles</small></span>
+        <span class="stk"><span class="se">✦</span>Claude API <small>le MJ</small></span>
+      </div>
+      <div class="callout tip">
+        <h4>💡 Le trio qui se parle tout seul</h4>
+        <p>GitHub + Vercel + Supabase forment une chaîne automatique : tu <b>pushes</b> ton code sur GitHub → Vercel le <b>déploie</b> tout seul en quelques secondes → ton site en ligne lit/écrit dans Supabase. Une fois branché, tu ne penses plus à « déployer » : tu codes, tu pushes, c'est en ligne.</p>
+      </div>
+    </section>
+
+    <!-- SETUP -->
+    <section id="setup">
+      <div class="sec-tag t-coral">Étape 0 · b</div>
+      <h2 class="sec-h">Le socle déployé</h2>
+      <p class="sec-lede">L'objectif du tout premier jour : un site vide mais EN LIGNE, et la chaîne auto-déploiement qui tourne. Avant toute fonctionnalité.</p>
+      <div class="tasks">
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Créer le repo GitHub</div><div class="td">Public ou privé, peu importe. Un <code>README</code> qui dit ce qu'est Legendia.</div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Initialiser le projet Next.js</div><div class="td"><code>npx create-next-app</code> avec Tailwind coché. Pousser le tout sur GitHub.</div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Brancher Vercel sur le repo</div><div class="td">Importer le repo dans Vercel → premier déploiement automatique. <b>Tu as déjà une URL en ligne.</b></div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Créer le projet Supabase</div><div class="td">Noter l'URL du projet et la clé publique (anon key).</div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Connecter Supabase à Next.js</div><div class="td">Les clés dans les <code>variables d'environnement</code> Vercel (jamais dans le code !). Installer le client Supabase.</div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Page d'accueil « Le Seuil » minimale</div><div class="td">Un titre, le logo, « bientôt ». Juste pour voir quelque chose de joli en ligne et le montrer aux amis.</div></div></div>
+      </div>
+      <div class="callout warn">
+        <h4>⚠️ La règle d'or des secrets</h4>
+        <p>Tes clés (Supabase, plus tard Claude) ne vont <b>JAMAIS</b> dans le code poussé sur GitHub. Toujours dans les <b>variables d'environnement</b> de Vercel. Un secret poussé par erreur sur un repo public, c'est la porte ouverte. Prends le réflexe dès maintenant.</p>
+      </div>
+    </section>
+
+    <!-- P1 -->
+    <section id="p1">
+      <div class="sec-tag t-indigo">Phase I</div>
+      <h2 class="sec-h">Compte & accès</h2>
+      <p class="sec-lede">Le verrou d'entrée : connexion Discord, et vérification d'appartenance au serveur. La fondation de toute la modération.</p>
+      <div class="phase-card" style="--pc:var(--indigo)">
+        <div class="pgoal"><b>But :</b> un visiteur peut se connecter avec Discord, et seuls les membres du serveur entrent. Les autres voient une porte fermée.</div>
+        <div class="pship">🚀 Livrable : connexion fonctionnelle en ligne</div>
+      </div>
+      <div class="tasks">
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Activer l'auth Discord dans Supabase</div><div class="td">Supabase gère les connexions « OAuth ». Créer une appli Discord développeur, brancher les clés.</div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Bouton « Se connecter avec Discord »</div><div class="td">Sur Le Seuil. Au clic, l'utilisateur s'authentifie via Discord et revient connecté.</div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Vérifier l'appartenance au serveur</div><div class="td">À la connexion, demander à Discord si la personne est bien membre du serveur. Sinon → accès refusé, message doux.</div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Table <code>profils</code> + rôle</div><div class="td">Créer chaque membre en base avec une colonne <code>rôle</code> (membre / modo / admin). Toi en admin.</div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Page protégée de test</div><div class="td">Une page « tu es bien connecté·e, [pseudo] » visible seulement une fois loggé. La preuve que le verrou marche.</div></div></div>
+      </div>
+      <div class="callout tip">
+        <h4>💡 Pourquoi commencer par là</h4>
+        <p>L'auth est le socle de <b>tout</b> le reste : pas de perso, pas de scène, pas de board sans savoir qui est connecté et avec quel rôle. C'est moins gratifiant visuellement, mais c'est la fondation. Une fois debout, tout s'appuie dessus.</p>
+      </div>
+    </section>
+
+    <!-- P2 -->
+    <section id="p2">
+      <div class="sec-tag t-leaf">Phase II</div>
+      <h2 class="sec-h">Le Hall & les univers</h2>
+      <p class="sec-lede">Le membre connecté arrive quelque part, et découvre l'univers Saint-Pierre. Le squelette de navigation.</p>
+      <div class="phase-card" style="--pc:var(--leaf-d)">
+        <div class="pgoal"><b>But :</b> après connexion, j'arrive au Hall, je vois l'univers Saint-Pierre et je peux consulter sa bible (le lore) dans le site.</div>
+        <div class="pship">🚀 Livrable : navigation + lore consultable en ligne</div>
+      </div>
+      <div class="tasks">
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Layout général + navigation</div><div class="td">La structure des onglets (Hall, Univers, etc.), le menu, l'identité visuelle de Legendia.</div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Table <code>univers</code></div><div class="td">Créer Saint-Pierre en base : nom, description, statut (ouvert/fermé).</div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">L'onglet « Les Univers »</div><div class="td">Liste les univers ouverts. Pour l'instant, juste Saint-Pierre.</div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Intégrer la bible (le lore)</div><div class="td">La bible navigable qu'on a écrite devient une page du site. <b>Tu l'as déjà — c'est du copier-intégrer.</b></div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Rejoindre un univers</div><div class="td">Un bouton « rejoindre Saint-Pierre » qui lie le membre à l'univers en base.</div></div></div>
+      </div>
+    </section>
+
+    <!-- P3 -->
+    <section id="p3">
+      <div class="sec-tag t-pink">Phase III</div>
+      <h2 class="sec-h">Personnages & fiches</h2>
+      <p class="sec-lede">Le cœur du RP : créer son personnage, le voir, l'éditer. Et le board de validation pour toi.</p>
+      <div class="phase-card" style="--pc:var(--pink)">
+        <div class="pgoal"><b>But :</b> je crée un personnage via un formulaire, il part en validation, tu l'approuves, il devient jouable et visible.</div>
+        <div class="pship">🚀 Livrable : création + validation de persos en ligne</div>
+      </div>
+      <div class="tasks">
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Table <code>personnages</code></div><div class="td">Nom, âge, quartier, métier, histoire, avatar, statut (brouillon/en attente/validé), lié au joueur et à l'univers.</div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Formulaire de création (Le Carnet)</div><div class="td">Guidé, chaleureux, calqué sur le chapitre VI de la bible (quartier, métier, failles…).</div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Affichage d'une fiche</div><div class="td">La fiche jolie, lisible, au format de la bible. Consultable par les autres.</div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Board admin : valider les fiches</div><div class="td">Ta vue « fiches en attente » → approuver / renvoyer en correction. Le premier morceau du board admin.</div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Upload d'avatar</div><div class="td">Stockage d'images via Supabase Storage. Optionnel au début (on peut mettre des initiales colorées).</div></div></div>
+      </div>
+    </section>
+
+    <!-- P4 -->
+    <section id="p4">
+      <div class="sec-tag t-sun">Phase IV</div>
+      <h2 class="sec-h">La Ville & les scènes</h2>
+      <p class="sec-lede">Le RP devient jouable : les lieux, les scènes, écrire en tant que son personnage.</p>
+      <div class="phase-card" style="--pc:var(--sun-d)">
+        <div class="pgoal"><b>But :</b> j'ouvre une scène dans un lieu, j'y écris en tant que mon perso, d'autres me rejoignent et répondent. Le RP, enfin.</div>
+        <div class="pship">🚀 Livrable : le RP fonctionne entre joueurs</div>
+      </div>
+      <div class="tasks">
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Tables <code>lieux</code> et <code>scènes</code></div><div class="td">Les lieux de la bible (café, plage, marché…). Une scène = un lieu + des participants + des messages.</div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Liste des lieux / la Ville</div><div class="td">L'onglet Ville : voir les lieux, les scènes en cours. (Le plan interactif joli viendra en phase VII.)</div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Ouvrir / rejoindre une scène</div><div class="td">Créer une scène dans un lieu, choisir le statut (libre / animée), y entrer avec un de ses persos.</div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Écrire en tant que son perso</div><div class="td">Le message s'affiche sous le nom + avatar du personnage. <b>L'auteur (joueur/perso) est stocké en base.</b></div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Le fil de scène en temps réel</div><div class="td">Les nouveaux messages apparaissent sans recharger. <code>Supabase Realtime</code> fait ça nativement.</div></div></div>
+      </div>
+    </section>
+
+    <!-- P5 -->
+    <section id="p5">
+      <div class="sec-tag t-indigo">Phase V</div>
+      <h2 class="sec-h">Le MJ entre en scène</h2>
+      <p class="sec-lede">L'âme de Legendia : les deux boutons (intervenir / ambiance), nourris par Claude et la bible.</p>
+      <div class="phase-card" style="--pc:var(--indigo)">
+        <div class="pgoal"><b>But :</b> dans une scène, je clique « faire intervenir » → un PNJ répond, joué par Claude, cohérent avec sa fiche et le lieu.</div>
+        <div class="pship">🚀 Livrable : le MJ joue les PNJ en ligne</div>
+      </div>
+      <div class="tasks">
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Table <code>pnj</code></div><div class="td">Les piliers de la bible (Magloire, Rosa…) avec leur fiche, surtout la « voix / parler ».</div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Brancher Claude API (côté serveur)</div><div class="td">Un point d'entrée sécurisé qui appelle Claude. Clé dans les variables d'env, jamais exposée au navigateur.</div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Bouton « ✦ Faire intervenir » + fenêtre</div><div class="td">L'option A : choisir qui (pilier/figurant) + quoi. Construit le contexte (fiche + scène + lore) et appelle Claude.</div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Bouton « 🌿 Demander une ambiance »</div><div class="td">Pose une atmosphère sans personnage, appuyée sur le lieu + le mois en cours.</div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Les garde-fous</div><div class="td">Délai de politesse, bouton pause, ton doux. Écrire le « prompt système » du MJ à partir de sa fiche de conception.</div></div></div>
+      </div>
+      <div class="callout tip">
+        <h4>💡 C'est ici que ta bible paie</h4>
+        <p>Tout le lore qu'on a écrit (lieux, PNJ, voix, calendrier) devient le <b>carburant</b> envoyé à Claude. Plus la bible est riche, plus le MJ est juste. Tu récoltes ce que tu as semé ces dernières heures.</p>
+      </div>
+    </section>
+
+    <!-- P6 -->
+    <section id="p6">
+      <div class="sec-tag t-sky">Phase VI</div>
+      <h2 class="sec-h">Le Beffroi & la vie</h2>
+      <p class="sec-lede">Ce qui fait revenir : les notifications, le rythme mensuel, les annonces.</p>
+      <div class="phase-card" style="--pc:var(--sky)">
+        <div class="pgoal"><b>But :</b> je reçois des notifs (« à toi d'écrire », « le MJ a ouvert le mois »), et le MJ rythme la vie au mois.</div>
+        <div class="pship">🚀 Livrable : la plateforme vit toute seule</div>
+      </div>
+      <div class="tasks">
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Table <code>notifications</code> + Le Beffroi</div><div class="td">L'onglet qui regroupe : à toi d'écrire, annonces, le MJ a parlé, relations.</div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Générer les notifs « à toi d'écrire »</div><div class="td">Quand quelqu'un répond dans ma scène, une notif apparaît au Beffroi.</div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Board admin : annonces</div><div class="td">Publier une annonce → elle s'affiche au Beffroi de tous. Éditer la charte.</div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Le rythme mensuel du MJ</div><div class="td">Ouverture / clôture de mois automatique ou déclenchée par toi. Le curseur de présence par univers.</div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Notifications push (PWA)</div><div class="td">Plus tard : les notifs sur le téléphone. Nécessite l'installation de la PWA. Optionnel mais puissant.</div></div></div>
+      </div>
+    </section>
+
+    <!-- P7 -->
+    <section id="p7">
+      <div class="sec-tag t-coral">Phase VII</div>
+      <h2 class="sec-h">Polish & ouverture</h2>
+      <p class="sec-lede">Les finitions qui transforment un outil en expérience, puis l'ouverture aux premiers joueurs.</p>
+      <div class="phase-card" style="--pc:var(--coral)">
+        <div class="pgoal"><b>But :</b> tout est beau, fluide, installable. On ouvre à un petit groupe test, puis à la communauté.</div>
+        <div class="pship">🚀 Livrable : Legendia ouvre ses portes</div>
+      </div>
+      <div class="tasks">
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Le plan interactif de la Ville</div><div class="td">La carte cliquable des lieux (le joli, version aboutie de l'onglet Ville).</div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Le Carnet complet</div><div class="td">Relations entre persos, journal de vie, domicile. La mémoire de chaque personnage.</div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">PWA installable</div><div class="td">Manifest + icône → Legendia s'installe sur l'écran d'accueil comme une app.</div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Tests avec quelques amis</div><div class="td">Inviter 3-4 personnes de confiance, jouer une vraie scène, noter ce qui coince.</div></div></div>
+        <div class="task"><div class="chk"></div><div class="tx"><div class="tt">Ouverture douce</div><div class="td">Ouvrir le Discord-vitrine, accueillir les premiers vrais joueurs. <b>Legendia est née.</b></div></div></div>
+      </div>
+    </section>
+
+    <!-- METHOD -->
+    <section id="method">
+      <div class="sec-tag t-leaf">Méthode</div>
+      <h2 class="sec-h">Conseils de route</h2>
+      <p class="sec-lede">Quelques principes pour ne pas te décourager et avancer sereinement.</p>
+      <div class="callout tip">
+        <h4>🚀 Pushe souvent, pushe petit</h4>
+        <p>Chaque petit bout qui marche → push → déployé. Tu vois ton progrès en ligne en continu, et si quelque chose casse, c'est facile de retrouver quand. Ne garde jamais des jours de travail non poussé.</p>
+      </div>
+      <div class="callout">
+        <h4>🧱 Une couche à la fois, finie avant la suivante</h4>
+        <p>Résiste à l'envie de tout faire en parallèle. Chaque phase doit <b>marcher seule</b> avant d'attaquer la prochaine. Un perso qu'on crée mais qu'on ne peut pas voir, c'est frustrant — finis le bout.</p>
+      </div>
+      <div class="callout">
+        <h4>🎨 Le moche-qui-marche d'abord, le beau ensuite</h4>
+        <p>Aux phases I–VI, vise le <b>fonctionnel</b>, même laid. Le polish (phase VII) viendra. Un bouton gris qui marche vaut mieux qu'un bouton magnifique qui n'existe pas encore.</p>
+      </div>
+      <div class="callout warn">
+        <h4>🆘 Quand tu bloques</h4>
+        <p>Tu vas bloquer, c'est normal et sain. Reviens me voir avec l'erreur précise, ou le bout de code qui coince. On débogue ensemble. <b>Ne reste jamais coincée seule des heures</b> — c'est là qu'on se décourage.</p>
+      </div>
+      <div class="callout">
+        <h4>📚 En parallèle : ton apprentissage</h4>
+        <p>Ce projet EST ton école Next.js + Supabase. Chaque phase t'apprend une brique fondamentale (auth, base de données, temps réel, API…). Tu apprends en construisant quelque chose que tu aimes — la meilleure façon.</p>
+      </div>
+    </section>
+
+    <div class="prog" id="prog">
+      <span class="ptxt" id="ptxt">0 / 0</span>
+      <div class="pbar"><i id="pbar"></i></div>
+      <span class="ptxt">avancement</span>
+    </div>
+
+    <div class="foot">Roadmap évolutive · « Anou ! » — on construit, une couche à la fois. 🌺</div>
+  </main>
+</div>
+
+<script>
+  // checkbox toggle + progress
+  const tasks=[...document.querySelectorAll('.task')];
+  const pbar=document.getElementById('pbar'), ptxt=document.getElementById('ptxt');
+  function refresh(){const d=tasks.filter(t=>t.classList.contains('done')).length;pbar.style.width=(d/tasks.length*100)+'%';ptxt.textContent=d+' / '+tasks.length;}
+  tasks.forEach(t=>{t.querySelector('.chk').addEventListener('click',()=>{t.classList.toggle('done');t.querySelector('.chk').textContent=t.classList.contains('done')?'✓':'';refresh();});});
+  refresh();
+  // active nav on scroll
+  const links=[...document.querySelectorAll('.nav a')];
+  const map=links.map(a=>({a,sec:document.querySelector(a.getAttribute('href'))})).filter(x=>x.sec);
+  const obs=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('active'));const m=map.find(x=>x.sec===e.target);if(m)m.a.classList.add('active');}});},{rootMargin:'-15% 0px -75% 0px'});
+  map.forEach(x=>obs.observe(x.sec));
+</script>
+</body>
+</html>
