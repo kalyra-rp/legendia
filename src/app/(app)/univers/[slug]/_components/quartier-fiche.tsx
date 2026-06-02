@@ -42,10 +42,21 @@ export function QuartierFiche({
         {quartier.emoji && (
           <span className="text-2xl leading-none">{quartier.emoji}</span>
         )}
-        <div>
-          <h2 className="font-display text-2xl font-bold leading-tight text-ink">
-            {quartier.nom}
-          </h2>
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-center gap-2">
+            <h2 className="font-display text-2xl font-bold leading-tight text-ink">
+              {quartier.nom}
+            </h2>
+            {/* L'étiquette : le rôle narratif du quartier, en un mot. */}
+            {quartier.etiquette && (
+              <span
+                className="rounded-full px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.12em] text-card"
+                style={{ backgroundColor: accent }}
+              >
+                {quartier.etiquette}
+              </span>
+            )}
+          </div>
           {quartier.sous_titre && (
             <p className="font-display text-sm italic" style={{ color: accent }}>
               {quartier.sous_titre}

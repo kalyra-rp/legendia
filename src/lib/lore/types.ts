@@ -38,6 +38,7 @@ export type Quartier = {
   emoji: string | null;
   couleur: string | null;
   ordre: number;
+  etiquette: string | null;
   situation: string | null;
   ambiance: string | null;
   qui_y_vit: string | null;
@@ -59,8 +60,10 @@ export type Pnj = {
   caractere: string | null;
   voix_parler: string | null;
   accroches_rp: string | null;
+  signes_distinctifs: string | null;
   couleur: string | null;
   avatar_initiale: string | null;
+  avatar_url: string | null;
   statut: "pilier" | "figurant";
   ordre: number;
 };
@@ -75,6 +78,7 @@ export type Lieu = {
   emoji: string | null;
   couleur: string | null;
   ordre: number;
+  etiquette: string | null;
   description: string | null;
   accroche_rp: string | null;
   pnj_pilier_id: string | null;

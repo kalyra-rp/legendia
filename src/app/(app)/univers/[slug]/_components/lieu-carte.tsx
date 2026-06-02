@@ -17,10 +17,23 @@ export function LieuCarte({ lieu }: { lieu: LieuAvecPilier }) {
     >
       <header className="flex items-center gap-2.5">
         {lieu.emoji && <span className="text-xl leading-none">{lieu.emoji}</span>}
-        <div>
-          <h4 className="font-display text-lg font-bold leading-tight text-ink">
-            {lieu.nom}
-          </h4>
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-center gap-2">
+            <h4 className="font-display text-lg font-bold leading-tight text-ink">
+              {lieu.nom}
+            </h4>
+            {lieu.etiquette && (
+              <span
+                className="rounded-full px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.12em]"
+                style={{
+                  color: accent,
+                  backgroundColor: `${accent}1a`, // la couleur à ~10 % d'opacité
+                }}
+              >
+                {lieu.etiquette}
+              </span>
+            )}
+          </div>
           {lieu.sous_titre && (
             <p className="text-xs italic text-ink-soft">{lieu.sous_titre}</p>
           )}

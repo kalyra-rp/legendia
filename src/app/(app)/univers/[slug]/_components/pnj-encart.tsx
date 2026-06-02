@@ -65,6 +65,17 @@ export function PnjEncart({ pnj }: { pnj: Pnj }) {
           </div>
         </div>
       )}
+
+      {pnj.signes_distinctifs && (
+        <div className="mt-3">
+          <div className="mb-1 font-mono text-[9.5px] uppercase tracking-[0.15em] text-faint">
+            Signes distinctifs
+          </div>
+          <div className="text-sm">
+            <Markdown>{pnj.signes_distinctifs}</Markdown>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
