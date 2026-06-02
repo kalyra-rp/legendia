@@ -27,7 +27,7 @@ function salutation(heure: number, pseudo: string) {
       mot: "Les histoires se tissent à leur rythme.",
     };
   }
-  if (heure >= 18 && heure < 22) {
+  if (heure >= 18 && heure < 23) {
     return {
       titre: `Belle soirée ${pseudo}`,
       mot: "L’heure douce des relectures.",
@@ -61,15 +61,20 @@ export default async function HallPage() {
     "voyageur·euse";
 
   // L'heure de la MAJORITÉ DES JOUEURS, quel que soit le fuseau du serveur
-  // (Vercel est en UTC). Intl nous donne l'heure locale du fuseau "Europe/Paris"
-  // (qui couvre aussi la Belgique). Neutre vis-à-vis des univers.
-  const heure = Number(
-    new Intl.DateTimeFormat("fr-FR", {
-      hour: "numeric",
-      hour12: false,
-      timeZone: "Europe/Paris",
-    }).format(new Date()),
-  );
+  // (Vercel est en UTC) ET quel que soit le fuseau de qui regarde. On lit
+  // l'heure du fuseau "Europe/Paris" (qui couvre aussi la Belgique).
+  //
+  // ⚠️ Piège : en locale fr-FR, .format() avec seulement l'heure renvoie
+  // "14 h" (avec un « h »), pas "14" → Number("14 h") = NaN, et toutes les
+  // comparaisons tombaient alors dans le « else » (nuit). On passe donc par
+  // formatToParts(), qui isole la VALEUR numérique de l'heure ("14"), et on
+  // force hourCycle "h23" pour rester dans 0–23 (sinon minuit donnerait "24").
+  const partsHeure = new Intl.DateTimeFormat("fr-FR", {
+    hour: "numeric",
+    hourCycle: "h23",
+    timeZone: "Europe/Paris",
+  }).formatToParts(new Date());
+  const heure = Number(partsHeure.find((p) => p.type === "hour")?.value);
 
   const { titre, mot } = salutation(heure, pseudo);
 
