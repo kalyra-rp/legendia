@@ -1,8 +1,8 @@
 import Colophon from "./_components/colophon";
-import Folio from "./_components/folio";
 import Frontispice from "./_components/frontispice";
 import Hero from "./_components/hero";
 import Inscriptions from "./_components/inscriptions";
+import Invitation from "./_components/invitation";
 import Plaques from "./_components/plaques";
 import Reveal from "./_components/reveal";
 
@@ -25,11 +25,11 @@ export default function Home() {
       </Reveal>
 
       <Reveal>
-        <Folio />
+        <Inscriptions />
       </Reveal>
 
       <Reveal>
-        <Inscriptions />
+        <Invitation />
       </Reveal>
 
       <Reveal>
