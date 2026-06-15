@@ -2,9 +2,9 @@
 
 /* ============================================================
    TOKENS DE LA DIRECTION ARTISTIQUE (CLAUDE.md §5)
-   Source unique de vérité : on ne met JAMAIS de couleur en dur
-   dans les composants — on passe par ces variables / les classes
-   Tailwind dérivées plus bas.
+   Source unique de vérité : aucune couleur en dur dans les
+   composants — on passe par ces variables / les classes Tailwind
+   dérivées plus bas.
    ============================================================ */
 :root {
   /* Fonds (du noir chaud au cuir) */
@@ -28,11 +28,11 @@
 
 /* ============================================================
    EXPOSITION À TAILWIND v4
-   `@theme inline` mappe nos tokens vers le moteur Tailwind tout en
-   gardant la RÉFÉRENCE à la variable (pas la valeur figée) : :root
-   reste la seule source modifiable.
+   `@theme inline` mappe nos tokens vers Tailwind en gardant la
+   RÉFÉRENCE à la variable : :root reste la seule source modifiable.
    → couleurs : bg-abyss, text-ink, text-gold, border-line, ...
-   → polices  : font-display (Cormorant), font-body (EB Garamond)
+   → polices  : font-display (Cormorant), font-body (EB Garamond),
+                font-hand (cursive manuscrite)
    ============================================================ */
 @theme inline {
   --color-abyss: var(--abyss);
@@ -50,6 +50,7 @@
 
   --font-display: var(--font-cormorant);
   --font-body: var(--font-eb-garamond);
+  --font-hand: var(--font-cursive);
 }
 
 /* ============================================================
@@ -63,7 +64,162 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* La DA l'exige : on respecte prefers-reduced-motion dès le socle. */
+/* Accessibilité : focus clavier toujours visible (exigence DA). */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+::selection {
+  background: var(--gold-lo);
+  color: var(--abyss);
+}
+
+/* ============================================================
+   SIGNATURES DE LA DA (l'audace concentrée ici, pas dans les composants)
+   ============================================================ */
+
+/* — Petit label en petites capitales, lettrage espacé — */
+.eyebrow {
+  font-family: var(--font-cormorant), serif;
+  text-transform: uppercase;
+  letter-spacing: 0.34em;
+  font-weight: 600;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+
+/* — L'or à la feuille : titre en dégradé d'or — */
+.gold-leaf {
+  background-image: linear-gradient(
+    100deg,
+    var(--gold-lo) 0%,
+    var(--gold) 28%,
+    var(--gold-hi) 50%,
+    var(--gold) 72%,
+    var(--gold-lo) 100%
+  );
+  background-size: 220% 100%;
+  background-position: 0% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* — Le reflet qui balaie lentement le titre — */
+.gold-sweep {
+  animation: gold-sweep 9s ease-in-out infinite;
+}
+@keyframes gold-sweep {
+  0%,
+  100% {
+    background-position: 0% 0;
+  }
+  50% {
+    background-position: 100% 0;
+  }
+}
+
+/* — Vignette : assombrissement radial des bords (sur un parent positionné) — */
+.vignette {
+  position: relative;
+}
+.vignette::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 38%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+}
+
+/* — La lettrine du frontispice — */
+.lettrine::first-letter {
+  font-family: var(--font-cormorant), serif;
+  font-weight: 600;
+  font-size: 3.5em;
+  line-height: 0.78;
+  float: left;
+  padding-right: 0.09em;
+  margin-top: 0.04em;
+  color: var(--gold);
+}
+
+/* — L'annotation en marge : une main inconnue, rouge oxydé — */
+.marginalia {
+  font-family: var(--font-cursive), cursive;
+  color: var(--oxide);
+  font-size: 1.15rem;
+  line-height: 1.35;
+  transform: rotate(-3.5deg);
+}
+
+/* — Passage caviardé : barre noire couvrante — */
+.redacted {
+  background: #000;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  border-radius: 1px;
+  padding: 0 0.12em;
+  user-select: none;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.85);
+}
+
+/* — Le tampon « accès initiés », encre passée et de travers — */
+.stamp {
+  font-family: var(--font-cormorant), serif;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-weight: 600;
+  color: var(--oxide);
+  border: 2px solid var(--oxide);
+  border-radius: 5px;
+  padding: 0.32rem 0.7rem;
+  transform: rotate(-11deg);
+  opacity: 0.6;
+}
+
+/* — Indice de défilement : léger va-et-vient — */
+.scroll-cue {
+  animation: cue-bob 2.4s ease-in-out infinite;
+}
+@keyframes cue-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(7px);
+    opacity: 1;
+  }
+}
+
+/* ============================================================
+   APPARITION AU DÉFILEMENT (IntersectionObserver)
+   On NE cache le contenu que si le JS est actif ET que l'utilisateur
+   accepte le mouvement. Sans JS (ou en motion réduite) → tout reste
+   visible d'emblée. Pas de contenu piégé, pas de flash.
+   ============================================================ */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* La DA l'exige : on neutralise les animations en motion réduite. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
