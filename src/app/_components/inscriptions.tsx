@@ -2,8 +2,10 @@ import { inscriptions } from "../_data/homepage";
 import Eyebrow from "./eyebrow";
 
 /**
- * Inscriptions — le fil des « dernières inscriptions au dossier » :
- * de petits faits divers, datés et situés, comme consignés à la main.
+ * Inscriptions — le fil des « dernières brèves » de la Gazette de
+ * Savannah : de petites nouvelles de la ville, datées et situées,
+ * comme consignées à la main. La vie de quartier d'abord ; l'étrange,
+ * seulement en filigrane.
  */
 export default function Inscriptions() {
   return (
@@ -12,12 +14,12 @@ export default function Inscriptions() {
       className="mx-auto max-w-3xl px-6 py-24"
     >
       <div className="mb-10 flex flex-col items-center gap-3 text-center">
-        <Eyebrow className="text-gold">Dernières inscriptions au dossier</Eyebrow>
+        <Eyebrow className="text-gold">Dernières brèves</Eyebrow>
         <h2
           id="inscriptions-titre"
           className="font-display text-4xl font-medium text-ink"
         >
-          Ce qui s'est consigné récemment
+          Les dernières nouvelles de la ville
         </h2>
       </div>
 

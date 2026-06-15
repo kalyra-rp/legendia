@@ -4,7 +4,7 @@ import Ornament from "./ornament";
 
 /**
  * ComingSoon — talon partagé par les espaces pas encore construits
- * (Atlas / Registre / Dossier). Reprend la DA et renvoie à l'accueil.
+ * (Atlas / Registre / Gazette). Reprend la DA et renvoie à l'accueil.
  */
 export default function ComingSoon({
   numeral,

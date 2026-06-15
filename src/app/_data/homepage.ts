@@ -30,10 +30,10 @@ export const plaques: Plaque[] = [
   },
   {
     numeral: "III",
-    title: "Le Dossier",
+    title: "La Gazette de Savannah",
     blurb:
-      "L'enquête vivante — ce qui s'inscrit, mois après mois, et que nul n'ose clore.",
-    href: "/dossier",
+      "La chronique de la ville, semaine après semaine — ce qui ouvre, ce qui s'y dit, et ce qui, parfois, ne s'explique pas tout à fait.",
+    href: "/gazette",
   },
 ];
 
@@ -45,21 +45,21 @@ export type Inscription = {
 
 export const inscriptions: Inscription[] = [
   {
-    date: "12 mai 2026",
-    lieu: "Bonaventure",
-    texte:
-      "Une procession de chiens errants observée à l'aube près du carré ancien. Aucun ne s'est approché des grilles.",
-  },
-  {
-    date: "3 avril 2026",
-    lieu: "River Street",
-    texte:
-      "Trois montres arrêtées à la même minute, déposées chez le même horloger. Le client n'a pas laissé de nom.",
-  },
-  {
-    date: "27 février 2026",
+    date: "6 juin 2026",
     lieu: "Forsyth Park",
     texte:
-      "La fontaine a gelé une nuit sans gel. Au matin, plus rien — sinon une odeur de marais.",
+      "Le marché du samedi a rouvert sous les chênes. On s'y est attardé plus que de raison — personne ne sait dire pourquoi l'après-midi a paru si court.",
+  },
+  {
+    date: "21 mai 2026",
+    lieu: "River Street",
+    texte:
+      "Un salon de thé a ouvert au bout de la rue. La patronne connaît déjà le prénom de chacun, même de ceux qui n'étaient jamais venus.",
+  },
+  {
+    date: "3 mai 2026",
+    lieu: "Bonaventure",
+    texte:
+      "Une famille s'est installée dans la vieille maison de l'allée. Les chiens du quartier font un petit détour devant la grille, mais on dit les nouveaux venus charmants.",
   },
 ];

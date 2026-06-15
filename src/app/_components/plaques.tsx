@@ -4,7 +4,7 @@ import Ornament from "./ornament";
 import Plaque from "./plaque";
 
 /**
- * Plaques — les trois entrées du registre (Atlas / Registre / Dossier),
+ * Plaques — les trois entrées du registre (Atlas / Registre / Gazette),
  * présentées comme trois plaques gravées I / II / III.
  */
 export default function Plaques() {
@@ -19,7 +19,7 @@ export default function Plaques() {
           id="plaques-titre"
           className="font-display text-4xl font-medium text-ink sm:text-5xl"
         >
-          Par où entrer dans le registre
+          Par où entrer dans le monde
         </h2>
         <Ornament className="w-48 text-line" />
       </div>
