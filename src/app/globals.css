@@ -1,65 +1,68 @@
 @import "tailwindcss";
 
 /* ============================================================
-   TOKENS DE LA DIRECTION ARTISTIQUE (CLAUDE.md §5)
-   Source unique de vérité : aucune couleur en dur dans les
-   composants — on passe par ces variables / les classes Tailwind
-   dérivées plus bas.
+   TOKENS DE LA DIRECTION ARTISTIQUE (CLAUDE.md §6)
+   « Legendia, la cité des légendes » — nuit pourpre, or champagne,
+   gemmes (émeraude / rose) en ponctuation. Source unique de vérité :
+   aucune couleur en dur dans les composants.
    ============================================================ */
 :root {
-  /* Fonds (du noir chaud au cuir) */
-  --abyss: #0e0a06; /* fond principal, noir chaud */
-  --leather: #181109; /* panneaux */
-  --leather2: #221810;
+  /* Fonds (la nuit pourpre) */
+  --night: #150a33; /* fond principal, nuit pourpre profond */
+  --night2: #231150;
+  --plum: #3a1d6e;
+  --purple: #6b3fa0;
+
+  /* Or (dominant) */
+  --gold: #e9c46a; /* or champagne, principal */
+  --gold-hi: #ffe9a8; /* reflet or */
+  --gold-lo: #b07f2c; /* or sombre */
+
+  /* Gemmes (ponctuation, jamais d'envahissement) */
+  --emerald: #3fc9a3;
+  --rose: #df7ab0;
 
   /* Encres (texte sur fond sombre) */
-  --ink: #ece0c6;
-  --ink-soft: #b6a079;
-  --ink-dim: #7d6c4f;
-
-  /* Accents */
-  --marsh: #6f8466; /* vert marais, accents discrets */
-  --gold: #c8a35c; /* or principal */
-  --gold-hi: #f1d79a; /* reflet or */
-  --gold-lo: #8a6a30; /* or sombre */
-  --oxide: #b04632; /* rouge oxydé — RARE, réservé à « ce qui cloche » */
-  --line: #3c2f1d; /* filets, bordures */
+  --cream: #f6ecd6; /* texte principal */
+  --soft: #dcc8ec; /* texte secondaire, lavande */
+  --dim: #a890c4;
 }
 
 /* ============================================================
    EXPOSITION À TAILWIND v4
    `@theme inline` mappe nos tokens vers Tailwind en gardant la
    RÉFÉRENCE à la variable : :root reste la seule source modifiable.
-   → couleurs : bg-abyss, text-ink, text-gold, border-line, ...
-   → polices  : font-display (Cormorant), font-body (EB Garamond),
-                font-hand (cursive manuscrite)
+   → couleurs : bg-night, text-cream, text-gold, text-emerald, ...
+   → polices  : font-display (Playfair), font-body (Lora),
+                font-script (Tangerine), font-caps (Cinzel)
    ============================================================ */
 @theme inline {
-  --color-abyss: var(--abyss);
-  --color-leather: var(--leather);
-  --color-leather2: var(--leather2);
-  --color-ink: var(--ink);
-  --color-ink-soft: var(--ink-soft);
-  --color-ink-dim: var(--ink-dim);
-  --color-marsh: var(--marsh);
+  --color-night: var(--night);
+  --color-night2: var(--night2);
+  --color-plum: var(--plum);
+  --color-purple: var(--purple);
   --color-gold: var(--gold);
   --color-gold-hi: var(--gold-hi);
   --color-gold-lo: var(--gold-lo);
-  --color-oxide: var(--oxide);
-  --color-line: var(--line);
+  --color-emerald: var(--emerald);
+  --color-rose: var(--rose);
+  --color-cream: var(--cream);
+  --color-soft: var(--soft);
+  --color-dim: var(--dim);
 
-  --font-display: var(--font-cormorant);
-  --font-body: var(--font-eb-garamond);
-  --font-hand: var(--font-cursive);
+  --font-display: var(--font-playfair);
+  --font-body: var(--font-lora);
+  --font-script: var(--font-tangerine);
+  --font-caps: var(--font-cinzel);
 }
 
 /* ============================================================
    BASE
    ============================================================ */
 body {
-  background-color: var(--abyss);
-  color: var(--ink);
-  font-family: var(--font-eb-garamond), Georgia, "Times New Roman", serif;
+  background-color: var(--night);
+  color: var(--cream);
+  font-family: var(--font-lora), Georgia, "Times New Roman", serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -71,22 +74,28 @@ body {
   border-radius: 2px;
 }
 ::selection {
-  background: var(--gold-lo);
-  color: var(--abyss);
+  background: var(--purple);
+  color: var(--cream);
 }
 
 /* ============================================================
    SIGNATURES DE LA DA (l'audace concentrée ici, pas dans les composants)
    ============================================================ */
 
-/* — Petit label en petites capitales, lettrage espacé — */
+/* — Petit label en petites capitales (Cinzel), lettrage espacé — */
 .eyebrow {
-  font-family: var(--font-cormorant), serif;
+  font-family: var(--font-cinzel), serif;
   text-transform: uppercase;
-  letter-spacing: 0.34em;
+  letter-spacing: 0.3em;
   font-weight: 600;
   font-size: 0.78rem;
-  color: var(--ink-soft);
+  color: var(--soft);
+}
+
+/* — La tagline calligraphiée (Tangerine), en or — */
+.script {
+  font-family: var(--font-tangerine), cursive;
+  color: var(--gold);
 }
 
 /* — L'or à la feuille : titre en dégradé d'or — */
@@ -119,69 +128,6 @@ body {
   50% {
     background-position: 100% 0;
   }
-}
-
-/* — Vignette : assombrissement radial des bords (sur un parent positionné) — */
-.vignette {
-  position: relative;
-}
-.vignette::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background: radial-gradient(
-    ellipse at center,
-    transparent 38%,
-    rgba(0, 0, 0, 0.5) 100%
-  );
-}
-
-/* — La lettrine du frontispice — */
-.lettrine::first-letter {
-  font-family: var(--font-cormorant), serif;
-  font-weight: 600;
-  font-size: 3.5em;
-  line-height: 0.78;
-  float: left;
-  padding-right: 0.09em;
-  margin-top: 0.04em;
-  color: var(--gold);
-}
-
-/* — L'annotation en marge : une main inconnue, rouge oxydé — */
-.marginalia {
-  font-family: var(--font-cursive), cursive;
-  color: var(--oxide);
-  font-size: 1.15rem;
-  line-height: 1.35;
-  transform: rotate(-3.5deg);
-}
-
-/* — Passage caviardé : barre noire couvrante — */
-.redacted {
-  background: #000;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-  border-radius: 1px;
-  padding: 0 0.12em;
-  user-select: none;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.85);
-}
-
-/* — Le tampon « accès initiés », encre passée et de travers — */
-.stamp {
-  font-family: var(--font-cormorant), serif;
-  text-transform: uppercase;
-  letter-spacing: 0.22em;
-  font-weight: 600;
-  color: var(--oxide);
-  border: 2px solid var(--oxide);
-  border-radius: 5px;
-  padding: 0.32rem 0.7rem;
-  transform: rotate(-11deg);
-  opacity: 0.6;
 }
 
 /* — Indice de défilement : léger va-et-vient — */

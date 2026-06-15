@@ -1,110 +1,134 @@
 # CLAUDE.md — Legendia
 
 > Fichier de cadrage lu par Claude Code à chaque session. Il décrit **ce qu'on construit**, **comment**, et **les règles à respecter**. À garder à jour quand le projet évolue.
+>
+> ⚠️ **Le concept a entièrement changé.** Tout ancien contenu lié à « Grimm / Savannah / les Deep / un registre sombre » est **obsolète** et doit être retiré, pas réutilisé. Le projet actuel est décrit ci-dessous.
 
 ---
 
 ## 1 · Le projet en une phrase
 
-**Legendia** est un univers de jeu de rôle narratif inspiré de la série *Grimm* : à **Savannah, Géorgie, en 2026**, des créatures issues du folklore mondial — les **Deep** — vivent cachées parmi les humains. Le projet comprend deux briques :
+**Legendia, la cité des légendes.** Un jeu de rôle narratif (slice of life fantasy) où l'on vient *vivre une autre vie* dans une cité somptueuse et magique, portée par une IA qui fait grouiller le monde de PNJ qui se souviennent de vous et d'événements qui surgissent sans cesse.
 
-1. **Le site** (priorité actuelle) — un « registre vivant » : le lore, l'atlas de la ville, l'enquête. Next.js + Supabase, déployé sur Vercel.
-2. **Le bot Discord** (plus tard) — un maître de jeu IA (API Claude) qui incarne les PNJ du quotidien et anime le monde. **À ne pas commencer tant que le site n'est pas posé.**
+Tagline : **« Venez vivre une autre vie. »**
+
+Deux briques :
+1. **Le site** (priorité actuelle) — la vitrine immersive de la cité. Next.js + Supabase, déployé sur Vercel.
+2. **Le bot Discord** (plus tard) — le cœur du projet : un MJ IA (API Claude) qui incarne les PNJ (avec mémoire) et anime la cité. **À ne pas commencer tant que le site n'est pas posé.**
 
 ---
 
-## 2 · Règles de collaboration (importantes)
+## 2 · Le cœur du concept (à ne jamais perdre de vue)
+
+**Legendia = le quotidien rendu inépuisable par l'IA.** Ce n'est pas un thème, c'est une expérience. Trois couches :
+1. **Les joueurs entre eux** — le cœur émotionnel (relations, scènes). L'IA ne remplace jamais le RP joueur-à-joueur.
+2. **Les PNJ-IA qui se souviennent** — le liant chaleureux : ils connaissent le perso, son quartier, ses habitudes ; la cité te reconnaît.
+3. **Les événements injectés par l'IA** — l'anti-routine : il se passe toujours quelque chose. C'est la promesse même (« vivre plus intensément »).
+
+Le décor (la cité) est un **écrin** au service de ce cœur.
+
+---
+
+## 3 · Règles de collaboration (importantes)
 
 - **Toujours montrer un plan avant d'agir** sur une tâche non triviale. Pas de refactor massif ou de suppression sans validation.
-- **Avancer par petits incréments validables.** Une chose à la fois, qui marche, qu'on voit.
+- **Avancer par petits incréments validables.**
 - **Ne jamais toucher aux fichiers d'infra sans demander** : `.env*`, config Vercel, clés Supabase.
 - **Ne jamais commiter de secret.** Les `.env*` restent gitignorés.
-- **Demander avant d'introduire une nouvelle dépendance lourde.** Préférer le standard (Next.js App Router, Supabase JS) au foisonnement de librairies.
-- Le code et les commentaires peuvent être en français (c'est un projet francophone).
+- **Demander avant d'introduire une nouvelle dépendance lourde.**
+- Le code et les commentaires peuvent être en français (projet francophone).
 
 ---
 
-## 3 · Ordre de construction
+## 4 · État du repo & ordre de construction
 
-**Phase 1 — le socle du site** (ici, maintenant)
-1. Initialiser Next.js (App Router, TypeScript, Tailwind).
-2. Poser le système de design (tokens DA ci-dessous).
-3. Construire la **homepage** (maquette déjà validée, voir §5).
+Le site contient (peut-être encore) une ancienne homepage et des pages dans l'ancienne DA « registre sombre ». **Cette DA est abandonnée.** Il faut refaire la homepage et les pages dans la nouvelle DA (voir §6).
 
-**Phase 2 — étendre le site**
-- L'Atlas (carte de Savannah + fiches-lieux)
-- Le Registre (encyclopédie du lore)
-- Le Dossier (enquête vivante, alimentée plus tard)
-- Le Vade-mecum (hors-fiction : règles, création de perso)
+**Phase 1 — refonte du site**
+1. Vérifier/poser les tokens de la nouvelle DA en variables CSS.
+2. Refaire la **homepage** dans la nouvelle DA (maquette validée, voir §7).
+3. Réaligner les pages-talons sur le nouveau monde (quartiers, etc.).
 
-**Phase 3 — le bot Discord** (chantier séparé, plus tard)
+**Phase 2 — le bot Discord** (chantier séparé, plus tard) : PNJ à mémoire + moteur d'événements (API Claude).
 
 ---
 
-## 4 · Stack technique
+## 5 · Stack technique
 
 - **Framework** : Next.js (App Router), TypeScript
-- **Style** : Tailwind CSS, avec les tokens de la DA en variables CSS
-- **Données** : Supabase (Postgres). Le schéma `public` est actuellement **vide** (reset complet effectué).
-- **Déploiement** : Vercel (déjà connecté au repo)
-- **Polices** : Cormorant (titres) + EB Garamond (corps) — Google Fonts
-- Variables d'environnement documentées dans `.env.example`
+- **Style** : Tailwind CSS v4 (thème en CSS `@theme`), tokens DA en variables CSS
+- **Données** : Supabase (Postgres), schéma `public` vide (reset effectué)
+- **Déploiement** : Vercel (déjà connecté)
+- **Polices** : Playfair Display (titres) · Tangerine (tagline calligraphiée) · Cinzel (petites capitales) · Lora (corps) — Google Fonts
+- Variables d'env documentées dans `.env.example`
 
 ---
 
-## 5 · Direction artistique (la DA est NON négociable)
+## 6 · Direction artistique (NON négociable)
 
-Le concept directeur : **le site EST un registre ancien** — un beau document hérité, du vieux Sud raffiné, qui consigne aussi ce que les registres ordinaires taisent. Élégant et chaud en surface, inquiétant en dessous.
+**Esprit :** féerique mais épuré et premium. Beaucoup d'espace négatif. Le merveilleux est *suggéré* (lanterne, étoile, lueurs), jamais surchargé. Loin du grimoire sombre comme du baroque illustratif. Une nuit enchantée, somptueuse et accueillante.
 
-**Palette (variables CSS)**
+**Palette (variables CSS) :**
 ```
---abyss:    #0e0a06   /* fond, noir chaud */
---leather:  #181109   /* panneaux */
---leather2: #221810
---ink:      #ece0c6   /* texte sur fond sombre */
---ink-soft: #b6a079
---ink-dim:  #7d6c4f
---marsh:    #6f8466   /* vert marais, accents discrets */
---gold:     #c8a35c   /* or principal */
---gold-hi:  #f1d79a   /* reflet or */
---gold-lo:  #8a6a30   /* or sombre */
---oxide:    #b04632   /* rouge oxydé — RARE, réservé à « ce qui cloche » */
---line:     #3c2f1d   /* filets, bordures */
+--night:    #150a33   /* fond, nuit pourpre profond */
+--night2:   #231150
+--plum:     #3a1d6e
+--purple:   #6b3fa0
+--gold:     #e9c46a   /* or champagne, principal */
+--gold-hi:  #ffe9a8   /* reflet or */
+--gold-lo:  #b07f2c   /* or sombre */
+--emerald:  #3fc9a3   /* accent joyau, ponctuel */
+--rose:     #df7ab0   /* accent joyau, ponctuel */
+--cream:    #f6ecd6   /* texte sur fond sombre */
+--soft:     #dcc8ec   /* texte secondaire (lavande) */
+--dim:      #a890c4
 ```
+L'or et le pourpre **dominent** ; l'émeraude et le rose **ponctuent** (gemmes, lueurs, étoiles, accents de survol). Jamais d'envahissement.
 
-**Typographie**
-- Titres : **Cormorant** (serif gravé, élégant), poids 500–700
-- Corps : **EB Garamond** (livresque)
-- Annotations in-world : une cursive manuscrite (ex. Petit Formal Script), en `--oxide`
-- Petits labels : Cormorant en petites capitales, letter-spacing large
+**Typographie :**
+- Titres : **Playfair Display** (serif élégant, baroque maîtrisé)
+- Tagline / accents calligraphiés : **Tangerine** (script fin, féerique), en or
+- Petites capitales / labels : **Cinzel**, letter-spacing large
+- Corps : **Lora** (serif chaleureux et lisible)
 
-**Signatures visuelles**
-- **L'or à la feuille** : titres en dégradé `--gold-lo → --gold → --gold-hi → --gold` avec reflet qui balaie lentement.
-- **L'annotation en marge** : une main inconnue écrit en rouge oxydé dans la marge — c'est ce qui transforme le bel objet en dossier. Élément récurrent.
-- **Le chêne & la mousse espagnole** : motif décoratif (séparateurs, en-têtes).
-- **Le sceau** : monogramme « L » dans une couronne de chêne, MMXXVI. Logo officiel.
-- **Texture** : grain de papier subtil, vignette, fines particules dorées qui dérivent (ambiance bougie). Respecter `prefers-reduced-motion`.
+**Signatures visuelles :**
+- **L'emblème** : une lanterne en trait fin doré dont la lumière est une étoile — « la cité qui ne dort jamais ». Logo officiel.
+- **L'or à la feuille** sur les titres (dégradé `--gold-lo → --gold → --gold-hi → --gold`), avec reflet qui balaie lentement.
+- **Le ciel nocturne** : fond pourpre dégradé, étoiles qui scintillent, **lanternes dorées qui dérivent** lentement (certaines teintées rose/émeraude). Respecter `prefers-reduced-motion`.
+- **La cité à l'horizon** : silhouette baroque (coupoles, tours, ponts) en ombre dorée, avec reflet dans les canaux.
+- **Cadre baroque fin** (filets dorés, coins ouvragés, petit fleuron) pour encadrer sans charger.
 
-**Principe** : dépenser l'audace à un seul endroit (le titre or, l'annotation rouge), garder tout le reste sobre et discipliné. Pas de surcharge.
-
-**Qualité de base** : responsive jusqu'au mobile, focus clavier visible, motion réduite respectée.
-
----
-
-## 6 · Le lore en bref (pour cohérence des contenus)
-
-- **Les créatures** = les **Deep**. Forme humaine permanente + **empreinte** involontaire (animaux qui fuient, tech qui bugue, plantes qui réagissent, coïncidences) + **rupture** fugace sous stress extrême.
-- **Trois couches** de Deep : fond sudiste (les plus anciens, vieilles familles) / couche atlantique (arrivés par le port) / les récents.
-- **Les joueurs incarnent uniquement des humains.** Les Deep sont joués par le staff et le bot. Jamais de Deep jouable.
-- **Niveaux de connaissance** : Ignorant → Douteur → Initié → Veilleur. Choisis à la création ou atteints par éveil en jeu.
-- **V1 du site : tout le lore est public.** L'ignorance se joue, elle n'est pas imposée par le site. (Contenu gradué = V2 éventuelle.)
-- Les **personas des PNJ** ne sont jamais sur le site ni dans Discord : ils vivront dans les fichiers du bot.
+**Qualité de base :** responsive jusqu'au mobile, focus clavier visible, motion réduite respectée.
 
 ---
 
-## 7 · Conventions de code
+## 7 · La homepage (maquette validée)
 
-- Composants serveur par défaut (App Router) ; client uniquement si nécessaire (`"use client"`).
+Une page qui se parcourt en descendant, dans l'ambiance nuit enchantée :
+
+1. **Hero** plein écran — ciel pourpre, étoiles, lanternes dérivantes (or/rose/émeraude), halo de lune. Cadre baroque fin. Eyebrow « La cité des légendes » (Cinzel). Titre **Legendia** en or à la feuille (Playfair) avec reflet. Tagline **« Venez vivre une autre vie »** en calligraphie dorée (Tangerine). Sous-titre. Bouton « Poussez les portes ». Indice de défilement. Silhouette de la cité + reflet en bas.
+2. **Invitation** — court texte d'accroche chaleureux en italique (la cité qui ne dort jamais, on y habite, autrement).
+3. **« Ce qui rend Legendia vivante »** — 3 cartes (le cœur du concept) : *La cité vous connaît* (PNJ à mémoire, accent or) · *Il se passe toujours quelque chose* (events, accent émeraude) · *Des liens qui durent* (RP joueur, accent rose). Survol : léger soulèvement + lueur de l'accent.
+4. **Teaser des quartiers** — pastilles dorées des quartiers (Le Grand Marché, Le Quartier Noble, Les Canaux, Le Quartier des Arts, Le Quartier Mystique, Le Port… « et d'autres à venir »). Non figé. Mention « les quartiers se dévoilent au fil du temps ».
+5. **Final** — retour au ciel étoilé : « Une autre vie vous attend… vous entrez ? » + bouton « Commencer ici » (→ `/vade-mecum` ou page d'accueil joueur, à définir).
+
+Chaque section apparaît en fondu au défilement (IntersectionObserver). Composants réutilisables, propres, accessibles.
+
+---
+
+## 8 · Le lore en bref (pour cohérence des contenus)
+
+- **Le monde** : une cité fantasy baroque & magique (Venise-de-conte), hors de notre monde. Couleurs riches, merveilleux exubérant mais doux.
+- **La magie** : une **texture du quotidien** (lanternes flottantes, sorts ratés, familiers, fontaines enchantées), pas une intrigue épique. Le SoL prime.
+- **Les joueurs** : des **habitants** de la cité, rôles variés (artisans, marchands, garde, artistes, nobles, gens des rues, mages…). Pas tous collègues. Une vraie vie hors du « travail ».
+- **La structure** : des **quartiers thématiques**, qui peuvent s'ouvrir progressivement.
+- **Les PNJ** : incarnés par le bot (avec mémoire) ; leurs personas vivent dans les fichiers du bot, **jamais** sur le site ni dans un canal lisible par les joueurs.
+
+---
+
+## 9 · Conventions de code
+
+- Composants serveur par défaut (App Router) ; client seulement si nécessaire (`"use client"`).
 - Tokens DA en variables CSS globales, jamais de couleurs en dur dans les composants.
-- Accessibilité : balises sémantiques, `alt`, contraste suffisant.
-- Commits clairs et atomiques, en français.
+- Accessibilité : balises sémantiques, `alt`, contraste suffisant, focus visible.
+- Commits clairs, atomiques, en français.
