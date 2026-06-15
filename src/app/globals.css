@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+/* ============================================================
+   TOKENS DE LA DIRECTION ARTISTIQUE (CLAUDE.md §5)
+   Source unique de vérité : on ne met JAMAIS de couleur en dur
+   dans les composants — on passe par ces variables / les classes
+   Tailwind dérivées plus bas.
+   ============================================================ */
+:root {
+  /* Fonds (du noir chaud au cuir) */
+  --abyss: #0e0a06; /* fond principal, noir chaud */
+  --leather: #181109; /* panneaux */
+  --leather2: #221810;
+
+  /* Encres (texte sur fond sombre) */
+  --ink: #ece0c6;
+  --ink-soft: #b6a079;
+  --ink-dim: #7d6c4f;
+
+  /* Accents */
+  --marsh: #6f8466; /* vert marais, accents discrets */
+  --gold: #c8a35c; /* or principal */
+  --gold-hi: #f1d79a; /* reflet or */
+  --gold-lo: #8a6a30; /* or sombre */
+  --oxide: #b04632; /* rouge oxydé — RARE, réservé à « ce qui cloche » */
+  --line: #3c2f1d; /* filets, bordures */
+}
+
+/* ============================================================
+   EXPOSITION À TAILWIND v4
+   `@theme inline` mappe nos tokens vers le moteur Tailwind tout en
+   gardant la RÉFÉRENCE à la variable (pas la valeur figée) : :root
+   reste la seule source modifiable.
+   → couleurs : bg-abyss, text-ink, text-gold, border-line, ...
+   → polices  : font-display (Cormorant), font-body (EB Garamond)
+   ============================================================ */
+@theme inline {
+  --color-abyss: var(--abyss);
+  --color-leather: var(--leather);
+  --color-leather2: var(--leather2);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-dim: var(--ink-dim);
+  --color-marsh: var(--marsh);
+  --color-gold: var(--gold);
+  --color-gold-hi: var(--gold-hi);
+  --color-gold-lo: var(--gold-lo);
+  --color-oxide: var(--oxide);
+  --color-line: var(--line);
+
+  --font-display: var(--font-cormorant);
+  --font-body: var(--font-eb-garamond);
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+body {
+  background-color: var(--abyss);
+  color: var(--ink);
+  font-family: var(--font-eb-garamond), Georgia, "Times New Roman", serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* La DA l'exige : on respecte prefers-reduced-motion dès le socle. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
